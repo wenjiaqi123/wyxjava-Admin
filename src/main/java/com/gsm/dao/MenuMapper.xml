@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gsm.dao.MenuDao">
+
+    <resultMap id="selectMenuListMap" type="MenuDo">
+        <id property="id" column="pId"/>
+        <result property="menuName" column="pMenuName"/>
+        <result property="menuCode" column="pMenuCode"/>
+        <result property="menuPid" column="pMenuPid"/>
+        <result property="showOrder" column="pShowOrder"/>
+        <collection property="list" ofType="MenuDo" javaType="List">
+            <id property="id" column="id"/>
+            <result property="menuName" column="menuName"/>
+            <result property="menuCode" column="menuCode"/>
+            <result property="menuPid" column="menuPid"/>
+            <result property="showOrder" column="showOrder"/>
+        </collection>
+    </resultMap>
+    <!--查询菜单信息-->
+    <select id="selectMenuList" resultMap="selectMenuListMap">
+        select t.id as pId,
+               t.menu_name as pMenuName,
+               t.menu_code as pMenuCode,
+               t.menu_pid as pMenuPid,
+               t.show_order as pShowOrder,
+               t1.id as id,
+               t1.menu_name as menuName,
+               t1.menu_code as menuCode,
+               t1.menu_pid as menuPid,
+               t1.show_order as showOrder
+        from sys_menu t
+               left join sys_menu t1 on t1.menu_pid = t.id
+        where t.menu_pid = 0
+        order by t.show_order, t1.show_order
+    </select>
+
+    <!--查询列表导航菜单列表-->
+    <select id="selectMenuNavList" parameterType="Integer" resultType="MenuDo">
+       select  t.id,
+               t.menu_name,
+               t.menu_code,
+               t.menu_pid,
+               t.show_order
+        from sys_menu t
+        where t.menu_pid = #{id}
+    </select>
+</mapper>
