@@ -20,4 +20,13 @@
             order by t.status desc
         </if>
     </select>
+
+    <!--根据id更新信息-->
+    <update id="updateRotationChartById" parameterType="RotationChartVo">
+        update rotation_chart
+        set chart_url = #{chartUrl},
+            web_url = #{webUrl},
+            status = #{status}
+        where id = #{id}
+    </update>
 </mapper>

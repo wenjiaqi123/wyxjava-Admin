@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface RotationChartDao {
     List<RotationChartDo> selectRotationChartList(RotationChartVo chartVo);
+
+    void updateRotationChartById(RotationChartVo chartVo);
 }
