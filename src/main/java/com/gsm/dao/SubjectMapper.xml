@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gsm.dao.SubjectDao">
+
+    <!--查询轮播图列表-->
+    <select id="selectSubjectList" parameterType="SubjectVo" resultType="SubjectDo">
+        select  t.id,
+                t.subject_name,
+                t.status
+        from subject t
+        <where>
+            <if test="status != -1">
+                t.status = ${status}
+            </if>
+        </where>
+        <if test="status == -1">
+            order by t.status desc
+        </if>
+    </select>
+
+    <resultMap id="selectSubjectDetailsListMap" type="SubjectDo">
+        <id property="id" column="id"/>
+        <result property="subjectName" column="subjectName"/>
+        <result property="status" column="status"/>
+
+        <association property="subjectDetailsDo" javaType="com.gsm.pojo.database.SubjectDetailsDo">
+            <id property="id" column="subDetailId"/>
+            <result property="subjectId" column="subjectId"/>
+            <result property="subIntroduction" column="subIntroduction"/>
+            <result property="subTeacher" column="subTeacher"/>
+            <result property="qqGroup" column="qqGroup"/>
+            <result property="subPic" column="subPic"/>
+            <result property="subTotal" column="subTotal"/>
+            <result property="subScore" column="subScore"/>
+            <result property="status" column="subDetailStatus"/>
+        </association>
+    </resultMap>
+    <select id="selectSubjectDetailsList" parameterType="SubjectVo" resultMap="selectSubjectDetailsListMap">
+        select t.id,
+               t.subject_name as subjectName,
+               t.status,
+               t1.id as subDetailId,
+               t1.subject_id as subjectId,
+               t1.sub_introduction as subIntroduction,
+               t1.sub_teacher as subTeacher,
+               t1.qq_group as qqGroup,
+               t1.sub_pic as subPic,
+               t1.sub_total as subTotal,
+               t1.sub_score as subScore,
+               t1.status as subDetailStatus
+        from subject t
+               left join subject_details t1
+                         on t.id = t1.subject_id
+        <where>
+            t1.status = 1
+            <if test="status != -1">
+                and t.status = ${status}
+            </if>
+        </where>
+        <if test="status == -1">
+            order by t.status desc,t.id asc
+        </if>
+        <if test="status != -1">
+            order by t.id asc
+        </if>
+    </select>
+
+    <!--根据id修改课程状态-->
+    <update id="updateSubjectStatus" parameterType="SubjectVo">
+        update subject
+        set status = #{status}
+        where id = #{id}
+    </update>
+</mapper>

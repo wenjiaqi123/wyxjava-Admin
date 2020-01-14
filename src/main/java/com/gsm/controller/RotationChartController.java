@@ -26,8 +26,6 @@ public class RotationChartController {
     @ApiOperation("修改单个轮播图信息")
     @PutMapping("/chart")
     public BoolVo updateRotationChartById(RotationChartVo chartVo){
-        System.out.println(chartVo.getId());
-        System.out.println(chartVo.getStatus());
         BoolVo boolVo = rotationChartService.updateRotationChartById(chartVo);
         return boolVo;
     }
