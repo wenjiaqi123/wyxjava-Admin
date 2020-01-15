@@ -9,4 +9,6 @@ public interface RotationChartDao {
     List<RotationChartDo> selectRotationChartList(RotationChartVo chartVo);
 
     void updateRotationChartById(RotationChartVo chartVo);
+
+    void insertRotationChart(RotationChartVo chartVo);
 }

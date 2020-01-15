@@ -11,4 +11,6 @@ public interface SubjectDao {
     List<SubjectDo> selectSubjectDetailsList(SubjectVo subjectVo);
 
     void updateSubjectStatus(SubjectVo subjectVo);
+
+    SubjectDo selectSubjectDetailsById(Long id);
 }

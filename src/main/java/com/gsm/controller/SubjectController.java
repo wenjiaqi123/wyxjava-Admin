@@ -1,5 +1,6 @@
 package com.gsm.controller;
 
+import com.gsm.pojo.database.SubjectDo;
 import com.gsm.pojo.vo.baseVo.BoolVo;
 import com.gsm.pojo.vo.baseVo.ListVo;
 import com.gsm.pojo.vo.vo.SubjectVo;
@@ -28,6 +29,13 @@ public class SubjectController {
     public ListVo selectSubjectDetailsList(SubjectVo subjectVo){
         ListVo listVo = subjectService.selectSubjectDetailsList(subjectVo);
         return listVo;
+    }
+
+    @ApiOperation("获取单个科目详细")
+    @GetMapping("/subjectDetails/{id}")
+    public SubjectDo selectSubjectDetailsById(@PathVariable Long id){
+        SubjectDo subjectDo = subjectService.selectSubjectDetailsById(id);
+        return subjectDo;
     }
 
     @ApiOperation("获取科目详细列表")

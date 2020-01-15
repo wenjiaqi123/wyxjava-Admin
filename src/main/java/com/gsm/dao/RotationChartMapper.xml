@@ -29,4 +29,16 @@
             status = #{status}
         where id = #{id}
     </update>
+
+    <!--新增轮播图信息-->
+    <insert id="insertRotationChart" parameterType="RotationChartVo">
+      insert into rotation_chart
+      (chart_url,
+      web_url,
+      status)
+      values
+      (#{chartUrl},
+      #{webUrl},
+      #{status})
+    </insert>
 </mapper>

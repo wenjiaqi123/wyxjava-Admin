@@ -37,4 +37,11 @@ public class RotationChartServiceImpl implements RotationChartService {
         BoolVo boolVo = new BoolVo(true,"保存成功");
         return boolVo;
     }
+
+    @Override
+    public BoolVo insertRotationChart(RotationChartVo chartVo) {
+        rotationChartDao.insertRotationChart(chartVo);
+        BoolVo boolVo = new BoolVo(true,"保存成功");
+        return boolVo;
+    }
 }

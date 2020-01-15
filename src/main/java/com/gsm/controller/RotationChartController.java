@@ -29,4 +29,11 @@ public class RotationChartController {
         BoolVo boolVo = rotationChartService.updateRotationChartById(chartVo);
         return boolVo;
     }
+
+    @ApiOperation("新增单个轮播图信息")
+    @PostMapping("/chart")
+    public BoolVo insertRotationChart(RotationChartVo chartVo){
+        BoolVo boolVo = rotationChartService.insertRotationChart(chartVo);
+        return boolVo;
+    }
 }

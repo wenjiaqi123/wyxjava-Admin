@@ -8,4 +8,6 @@ public interface RotationChartService {
     ListVo selectRotationChartList(RotationChartVo chartVo);
 
     BoolVo updateRotationChartById(RotationChartVo chartVo);
+
+    BoolVo insertRotationChart(RotationChartVo chartVo);
 }

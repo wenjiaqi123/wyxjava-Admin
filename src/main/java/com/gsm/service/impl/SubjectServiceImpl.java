@@ -46,6 +46,12 @@ public class SubjectServiceImpl implements SubjectService {
     }
 
     @Override
+    public SubjectDo selectSubjectDetailsById(Long id) {
+        SubjectDo subjectDo = subjectDao.selectSubjectDetailsById(id);
+        return subjectDo;
+    }
+
+    @Override
     public BoolVo updateSubjectStatus(SubjectVo subjectVo) {
         subjectDao.updateSubjectStatus(subjectVo);
         BoolVo boolVo = new BoolVo(true,"修改成功");

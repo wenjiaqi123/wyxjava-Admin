@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gsm.dao.CourseDao">
+
+    <resultMap id="selectCourseListMap" type="CourseDo">
+        <id property="id" column="id"/>
+        <result property="courseName" column="courseName"/>
+        <result property="subjectId" column="subjectId"/>
+        <result property="showOrder" column="showOrder"/>
+        <result property="status" column="status"/>
+
+        <association property="courseDetailsDo" javaType="com.gsm.pojo.database.CourseDetailsDo">
+            <id property="id" column="courseDetailsId"/>
+            <result property="courseId" column="courseId"/>
+            <result property="courseTime" column="courseTime"/>
+            <result property="courseSize" column="courseSize"/>
+            <result property="courseScore" column="courseScore"/>
+            <result property="status" column="courseDetailsStatus"/>
+        </association>
+    </resultMap>
+    <!--查询课程列表-->
+    <select id="selectCourseList" parameterType="CourseVo" resultMap="selectCourseListMap">
+        select  t.id as id,
+                t.course_name as courseName,
+                t.subject_id as subjectId,
+                t.show_order as showOrder,
+                t.status as status,
+                t1.id as courseDetailsId,
+                t1.course_id as courseId,
+                t1.course_time as courseTime,
+                t1.course_size as courseSize,
+                t1.course_score as courseScore,
+                t1.status as courseDetailsStatus
+        from course t
+          left join course_details t1 on t.id = t1.course_id
+        <where>
+            t.subject_id = #{subjectId}
+            <if test="status != -1">
+                and t.status = ${status}
+            </if>
+        </where>
+        <if test="status != -1">
+            order by t.show_order asc
+        </if>
+        <if test="status == -1">
+            order by t.status desc,t.show_order asc
+        </if>
+    </select>
+</mapper>
