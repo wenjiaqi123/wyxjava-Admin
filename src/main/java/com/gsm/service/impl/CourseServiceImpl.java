@@ -1,7 +1,9 @@
 package com.gsm.service.impl;
 
 import com.gsm.dao.CourseDao;
+import com.gsm.pojo.database.CourseDetailsDo;
 import com.gsm.pojo.database.CourseDo;
+import com.gsm.pojo.vo.baseVo.BoolVo;
 import com.gsm.pojo.vo.baseVo.ListVo;
 import com.gsm.pojo.vo.vo.CourseVo;
 import com.gsm.service.CourseService;
@@ -18,11 +20,22 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public ListVo selectCourseList(CourseVo courseVo) {
         List<CourseDo> courseDoList = courseDao.selectCourseList(courseVo);
-        long y = System.currentTimeMillis();
+        courseDoList.forEach(i -> {
+            if (i.getCourseDetailsDo() == null) {
+                i.setCourseDetailsDo(new CourseDetailsDo());
+            }
+        });
         ListVo listVo = ListVo.builder()
                 .list(courseDoList)
                 .msg("课程列表")
                 .build();
         return listVo;
+    }
+
+    @Override
+    public BoolVo updateCourseStatus(CourseVo courseVo) {
+        courseDao.updateCourseStatus(courseVo);
+        BoolVo boolVo = new BoolVo(true, "修改成功");
+        return boolVo;
     }
 }

@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface CourseDao {
     List<CourseDo> selectCourseList(CourseVo courseVo);
+
+    void updateCourseStatus(CourseVo courseVo);
 }

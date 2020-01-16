@@ -48,4 +48,11 @@
             order by t.status desc,t.show_order asc
         </if>
     </select>
+
+    <!--修改课程状态-->
+    <update id="updateCourseStatus" parameterType="CourseVo">
+        update course
+        set status = #{status}
+        where id = #{id}
+    </update>
 </mapper>
