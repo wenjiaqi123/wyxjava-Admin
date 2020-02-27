@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gsm.dao.SuggestionDao">
+
+    <insert id="insertSuggestion" parameterType="SuggestionVo">
+        insert into suggestion
+        (suggest_type,
+        suggest_desc,
+        iphone_no,
+        email)
+        values
+        (#{suggestType},
+        #{suggestDesc},
+        #{iphoneNo},
+        #{email})
+    </insert>
+
+    <select id="selectSuggestion" parameterType="SuggestionVo" resultType="SuggestionDo">
+        select t.id,
+                t.suggest_type,
+                t.suggest_desc,
+                t.iphone_no,
+                t.email,
+                t.status
+        from suggestion t
+        <where>
+            <if test="suggestType != -1">
+                and suggest_type = #{suggestType}
+            </if>
+            <if test="status != -1">
+                and t.status = #{status}
+            </if>
+        </where>
+        order by t.status desc,t.suggest_type asc
+    </select>
+</mapper>
