@@ -55,4 +55,17 @@
         set status = #{status}
         where id = #{id}
     </update>
+
+
+    <select id="selectCourseDataList" parameterType="CourseDataVo" resultType="CourseDataDo">
+        select t.id,
+               t.course_id,
+               t.data_name,
+               t.data_url,
+               t.show_order,
+               t.status
+        from course_data t
+        where t.course_id = #{courseId}
+        order by t.show_order asc
+    </select>
 </mapper>

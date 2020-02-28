@@ -3,6 +3,7 @@ package com.gsm.controller;
 import com.gsm.pojo.database.SubjectDo;
 import com.gsm.pojo.vo.baseVo.BoolVo;
 import com.gsm.pojo.vo.baseVo.ListVo;
+import com.gsm.pojo.vo.vo.SubjectDetailsVo;
 import com.gsm.pojo.vo.vo.SubjectVo;
 import com.gsm.service.SubjectService;
 import io.swagger.annotations.Api;
@@ -31,17 +32,24 @@ public class SubjectController {
         return listVo;
     }
 
-    @ApiOperation("获取单个科目详细")
+    @ApiOperation("获取单个课程")
     @GetMapping("/subjectDetails/{id}")
     public SubjectDo selectSubjectDetailsById(@PathVariable Long id){
         SubjectDo subjectDo = subjectService.selectSubjectDetailsById(id);
         return subjectDo;
     }
 
-    @ApiOperation("获取科目详细列表")
+    @ApiOperation("修改状态")
     @PutMapping("/subjectStatus")
     public BoolVo updateSubjectStatus(SubjectVo subjectVo){
         BoolVo boolVo = subjectService.updateSubjectStatus(subjectVo);
+        return boolVo;
+    }
+
+    @ApiOperation("更新课程详情")
+    @PutMapping("/subjectDetails")
+    public BoolVo updateSubjectDetailsById(SubjectDetailsVo subjectDetailsVo){
+        BoolVo boolVo = subjectService.updateSubjectDetailsById(subjectDetailsVo);
         return boolVo;
     }
 }

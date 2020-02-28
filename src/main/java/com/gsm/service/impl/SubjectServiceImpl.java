@@ -6,6 +6,7 @@ import com.gsm.dao.SubjectDao;
 import com.gsm.pojo.database.SubjectDo;
 import com.gsm.pojo.vo.baseVo.BoolVo;
 import com.gsm.pojo.vo.baseVo.ListVo;
+import com.gsm.pojo.vo.vo.SubjectDetailsVo;
 import com.gsm.pojo.vo.vo.SubjectVo;
 import com.gsm.service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +55,13 @@ public class SubjectServiceImpl implements SubjectService {
     @Override
     public BoolVo updateSubjectStatus(SubjectVo subjectVo) {
         subjectDao.updateSubjectStatus(subjectVo);
+        BoolVo boolVo = new BoolVo(true,"修改成功");
+        return boolVo;
+    }
+
+    @Override
+    public BoolVo updateSubjectDetailsById(SubjectDetailsVo subjectDetailsVo) {
+        subjectDao.updateSubjectDetailsById(subjectDetailsVo);
         BoolVo boolVo = new BoolVo(true,"修改成功");
         return boolVo;
     }

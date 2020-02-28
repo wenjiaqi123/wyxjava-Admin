@@ -9,4 +9,6 @@ public interface SuggestionDao {
     void insertSuggestion(SuggestionVo suggestionVo);
 
     List<SuggestionDo> selectSuggestion(SuggestionVo suggestionVo);
+
+    void updateSuggestion(SuggestionVo suggestionVo);
 }

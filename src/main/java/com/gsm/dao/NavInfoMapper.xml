@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gsm.dao.NavigationDao">
+
+    <select id="selectNavInfo" parameterType="NavInfoVo" resultType="NavInfoVo">
+      select t.id,
+             t.nav_id,
+             t.url,
+             t.status
+      from nav_info t
+      where t.status = 1 and t.nav_id = #{navId}
+    </select>
+
+    <update id="updateNavInfo" parameterType="NavInfoVo">
+        update nav_info
+        set url = #{url}
+        where nav_id = #{navId}
+    </update>
+</mapper>

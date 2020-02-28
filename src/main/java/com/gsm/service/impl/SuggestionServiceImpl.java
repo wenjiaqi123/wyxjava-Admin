@@ -32,4 +32,11 @@ public class SuggestionServiceImpl implements SuggestionService {
                 .build();
         return listVo;
     }
+
+    @Override
+    public BoolVo updateSuggestion(SuggestionVo suggestionVo) {
+        suggestionDao.updateSuggestion(suggestionVo);
+        BoolVo boolVo = new BoolVo(true, "修改成功");
+        return boolVo;
+    }
 }

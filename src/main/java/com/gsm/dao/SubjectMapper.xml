@@ -111,4 +111,14 @@
         set status = #{status}
         where id = #{id}
     </update>
+
+    <!--根据id修改课程详情-->
+    <update id="updateSubjectDetailsById" parameterType="SubjectDetailsVo">
+        update subject_details
+        set sub_introduction = #{subIntroduction},
+               sub_teacher = #{subTeacher},
+               qq_group = #{qqGroup},
+               sub_pic = #{subPic}
+        where subject_id = #{subjectId}
+    </update>
 </mapper>

@@ -7,10 +7,7 @@ import com.gsm.service.SuggestionService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Api("建议反馈")
 @RestController
@@ -31,5 +28,12 @@ public class SuggestionController {
     public ListVo selectSuggestion(SuggestionVo suggestionVo){
         ListVo listVo = suggestionService.selectSuggestion(suggestionVo);
         return listVo;
+    }
+
+    @ApiOperation("修改状态")
+    @PutMapping("/suggestion")
+    public BoolVo updateSuggestion(SuggestionVo suggestionVo){
+        BoolVo boolVo = suggestionService.updateSuggestion(suggestionVo);
+        return boolVo;
     }
 }

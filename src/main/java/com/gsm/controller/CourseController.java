@@ -2,6 +2,7 @@ package com.gsm.controller;
 
 import com.gsm.pojo.vo.baseVo.BoolVo;
 import com.gsm.pojo.vo.baseVo.ListVo;
+import com.gsm.pojo.vo.vo.CourseDataVo;
 import com.gsm.pojo.vo.vo.CourseVo;
 import com.gsm.service.CourseService;
 import io.swagger.annotations.Api;
@@ -31,5 +32,12 @@ public class CourseController {
     public BoolVo updateCourseStatus(CourseVo courseVo){
         BoolVo boolVo = courseService.updateCourseStatus(courseVo);
         return boolVo;
+    }
+
+    @ApiOperation("获取课程资料")
+    @GetMapping("/courseDataList")
+    public ListVo selectCourseDataList(CourseDataVo courseDataVo){
+        ListVo listVo = courseService.selectCourseDataList(courseDataVo);
+        return listVo;
     }
 }

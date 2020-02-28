@@ -35,4 +35,10 @@
         </where>
         order by t.status desc,t.suggest_type asc
     </select>
+
+    <update id="updateSuggestion" parameterType="SuggestionVo">
+        update suggestion
+        set status = #{status}
+        where id = #{id}
+    </update>
 </mapper>

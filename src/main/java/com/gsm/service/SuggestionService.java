@@ -8,4 +8,6 @@ public interface SuggestionService {
     BoolVo insertSuggestion(SuggestionVo suggestionVo);
 
     ListVo selectSuggestion(SuggestionVo suggestionVo);
+
+    BoolVo updateSuggestion(SuggestionVo suggestionVo);
 }
