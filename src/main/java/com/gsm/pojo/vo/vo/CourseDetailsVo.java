@@ -1,4 +1,4 @@
-package com.gsm.pojo.database;
+package com.gsm.pojo.vo.vo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @ApiModel("课程细节信息")
-public class CourseDetailsDo {
+public class CourseDetailsVo {
     @ApiModelProperty("id")
     private Long id;
     @ApiModelProperty("课程id")

@@ -7,6 +7,7 @@ import com.gsm.pojo.database.CourseDo;
 import com.gsm.pojo.vo.baseVo.BoolVo;
 import com.gsm.pojo.vo.baseVo.ListVo;
 import com.gsm.pojo.vo.vo.CourseDataVo;
+import com.gsm.pojo.vo.vo.CourseDetailsVo;
 import com.gsm.pojo.vo.vo.CourseVo;
 import com.gsm.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,5 +50,21 @@ public class CourseServiceImpl implements CourseService {
                 .msg("课程资料列表")
                 .build();
         return listVo;
+    }
+
+    @Override
+    public CourseDetailsDo selectCourseDetails(CourseDetailsVo courseDetailsVo) {
+        CourseDetailsDo courseDetailsDo = courseDao.selectCourseDetails(courseDetailsVo);
+        return courseDetailsDo;
+    }
+
+    @Override
+    public BoolVo updateCourseDetails(CourseDetailsVo courseDetailsVo) {
+        return null;
+    }
+
+    @Override
+    public BoolVo updateCourseDataList(List<CourseDataVo> list) {
+        return null;
     }
 }

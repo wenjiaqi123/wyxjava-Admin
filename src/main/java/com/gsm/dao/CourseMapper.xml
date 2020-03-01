@@ -68,4 +68,16 @@
         where t.course_id = #{courseId}
         order by t.show_order asc
     </select>
+
+    <select id="selectCourseDetails" parameterType="CourseDetailsVo" resultType="CourseDetailsDo">
+        select t.id,
+               t.course_id,
+               t.course_url,
+               t.course_time,
+               t.course_size,
+               t.course_score,
+               t.status
+        from course_details t
+        where t.course_id = #{courseId}
+    </select>
 </mapper>
