@@ -12,8 +12,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @Api("课程模块")
 @RestController
 @RequestMapping("/course")
@@ -44,11 +42,9 @@ public class CourseController {
 
     @ApiOperation("更新课程资料")
     @PostMapping("/courseDataList")
-    public BoolVo updateCourseDataList(@RequestBody List<CourseDataVo> list){
-        //BoolVo boolVo = courseService.updateCourseDataList(list);
-        System.out.println(list);
-        //return boolVo;
-        return new BoolVo();
+    public BoolVo updateCourseDataList(CourseDetailsVo vo){
+        BoolVo boolVo = courseService.updateCourseDataList(vo.getCourseDataVos());
+        return boolVo;
     }
 
     @ApiOperation("获取课程详细信息")
@@ -59,7 +55,7 @@ public class CourseController {
     }
 
     @ApiOperation("更新课程详细信息")
-    @PutMapping("/courseDetails")
+    @PostMapping("/courseDetails")
     public BoolVo updateCourseDetails(CourseDetailsVo courseDetailsVo){
         BoolVo boolVo = courseService.updateCourseDetails(courseDetailsVo);
         System.out.println(courseDetailsVo);

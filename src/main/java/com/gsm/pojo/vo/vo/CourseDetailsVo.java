@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,4 +29,6 @@ public class CourseDetailsVo {
     private Double courseScore;
     @ApiModelProperty("状态")
     private Integer status;
+
+    private List<CourseDataVo> courseDataVos;
 }
