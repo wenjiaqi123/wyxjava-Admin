@@ -40,13 +40,6 @@ public class CourseController {
         return listVo;
     }
 
-    @ApiOperation("更新课程资料")
-    @PostMapping("/courseDataList")
-    public BoolVo updateCourseDataList(CourseDetailsVo vo){
-        BoolVo boolVo = courseService.updateCourseDataList(vo.getCourseDataVos());
-        return boolVo;
-    }
-
     @ApiOperation("获取课程详细信息")
     @GetMapping("/courseDetails")
     public CourseDetailsDo selectCourseDetails(CourseDetailsVo courseDetailsVo){
@@ -56,9 +49,22 @@ public class CourseController {
 
     @ApiOperation("更新课程详细信息")
     @PostMapping("/courseDetails")
-    public BoolVo updateCourseDetails(CourseDetailsVo courseDetailsVo){
-        BoolVo boolVo = courseService.updateCourseDetails(courseDetailsVo);
-        System.out.println(courseDetailsVo);
+    public BoolVo updateCourseDetails(CourseDetailsVo vo){
+        BoolVo b1 = courseService.updateCourseDetails(vo);
+        BoolVo b2 = courseService.updateCourseDataList(vo.getCourseId(),vo.getCourseDataVos());
+        if(b1.getFlag() && b2.getFlag()){
+            BoolVo boolVo = new BoolVo(true, "修改成功");
+            return boolVo;
+        }else {
+            BoolVo boolVo = new BoolVo(false, "修改成功");
+            return boolVo;
+        }
+    }
+
+    @ApiOperation("保存课程信息和资料信息")
+    @PostMapping("/courseDetailsAndData")
+    public BoolVo insertCourseDetailsAndData(CourseVo courseVo,CourseDetailsVo courseDetailsVo){
+        BoolVo boolVo = courseService.insertCourseDetailsAndData(courseVo,courseDetailsVo);
         return boolVo;
     }
 }

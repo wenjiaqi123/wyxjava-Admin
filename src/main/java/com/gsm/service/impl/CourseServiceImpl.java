@@ -60,11 +60,37 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public BoolVo updateCourseDetails(CourseDetailsVo courseDetailsVo) {
-        return null;
+        courseDao.updateCourseDetails(courseDetailsVo);
+        BoolVo boolVo = new BoolVo(true, "修改成功");
+        return boolVo;
     }
 
     @Override
-    public BoolVo updateCourseDataList(List<CourseDataVo> list) {
-        return null;
+    public BoolVo updateCourseDataList(Long courseId, List<CourseDataVo> list) {
+        courseDao.deleteCourseDataListByCourseId(courseId);
+        courseDao.insertCourseDataList(list);
+        BoolVo boolVo = new BoolVo(true, "修改成功");
+        return boolVo;
+    }
+
+    @Override
+    public BoolVo insertCourseDetailsAndData(CourseVo courseVo, CourseDetailsVo courseDetailsVo) {
+        //根据科目id添加新课程
+        courseDao.insertCourseBySubjectId(courseVo);
+        //获取新增的课程id
+        Long courseVoId = courseVo.getId();
+        courseDetailsVo.setCourseId(courseVoId);
+        //根据课程id添加课程详细信息
+        courseDao.insertCourseDetailsByCourseId(courseDetailsVo);
+        List<CourseDataVo> courseDataVos = courseDetailsVo.getCourseDataVos();
+        if (courseDataVos != null && courseDataVos.size() > 0) {
+            courseDataVos.forEach(i -> {
+                i.setCourseId(courseVoId);
+            });
+            //根据课程id添加课程资料
+            courseDao.insertCourseDataByCourseId(courseDataVos);
+        }
+        BoolVo boolVo = new BoolVo(true, "保存成功");
+        return boolVo;
     }
 }

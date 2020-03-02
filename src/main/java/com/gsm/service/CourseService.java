@@ -20,5 +20,7 @@ public interface CourseService {
 
     BoolVo updateCourseDetails(CourseDetailsVo courseDetailsVo);
 
-    BoolVo updateCourseDataList(List<CourseDataVo> list);
+    BoolVo updateCourseDataList(Long courseId, List<CourseDataVo> list);
+
+    BoolVo insertCourseDetailsAndData(CourseVo courseVo, CourseDetailsVo vo);
 }

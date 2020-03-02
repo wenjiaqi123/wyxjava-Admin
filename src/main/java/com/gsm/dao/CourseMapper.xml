@@ -22,19 +22,19 @@
     </resultMap>
     <!--查询课程列表-->
     <select id="selectCourseList" parameterType="CourseVo" resultMap="selectCourseListMap">
-        select  t.id as id,
-                t.course_name as courseName,
-                t.subject_id as subjectId,
-                t.show_order as showOrder,
-                t.status as status,
-                t1.id as courseDetailsId,
-                t1.course_id as courseId,
-                t1.course_time as courseTime,
-                t1.course_size as courseSize,
-                t1.course_score as courseScore,
-                t1.status as courseDetailsStatus
+        select t.id as id,
+        t.course_name as courseName,
+        t.subject_id as subjectId,
+        t.show_order as showOrder,
+        t.status as status,
+        t1.id as courseDetailsId,
+        t1.course_id as courseId,
+        t1.course_time as courseTime,
+        t1.course_size as courseSize,
+        t1.course_score as courseScore,
+        t1.status as courseDetailsStatus
         from course t
-          left join course_details t1 on t.id = t1.course_id
+        left join course_details t1 on t.id = t1.course_id
         <where>
             t.subject_id = #{subjectId}
             <if test="status != -1">
@@ -80,4 +80,83 @@
         from course_details t
         where t.course_id = #{courseId}
     </select>
+
+
+    <update id="updateCourseDetails" parameterType="CourseDataVo">
+        update course_details
+        set course_url = #{courseUrl},
+            course_score = #{courseScore}
+        where course_id = #{courseId}
+    </update>
+
+    <delete id="deleteCourseDataListByCourseId" parameterType="Long">
+      delete from course_data
+      where course_id = #{courseId}
+    </delete>
+    <insert id="insertCourseDataList" parameterType="CourseDataVo">
+        insert into course_data
+        (course_id,
+        data_name,
+        data_url,
+        show_order,
+        status)
+        values
+        <foreach collection="list" item="i" index="index" separator=",">
+            (#{i.courseId},
+            #{i.dataName},
+            #{i.dataUrl},
+            #{i.showOrder},
+            1)
+        </foreach>
+    </insert>
+
+    <insert id="insertCourseBySubjectId" parameterType="CourseVo" keyProperty="id" useGeneratedKeys="true">
+        <selectKey resultType="Long" keyProperty="id" order="AFTER">
+            select LAST_INSERT_ID()
+        </selectKey>
+        insert into course
+        (course_name,
+        subject_id,
+        show_order,
+        status)
+        select
+        #{courseName},
+        #{subjectId},
+        (select ifnull((select max(show_order) from course where subject_id = #{subjectId}), 0) + 1),
+        1
+    </insert>
+
+    <insert id="insertCourseDetailsByCourseId" parameterType="CourseDetailsVo">
+        insert into course_details
+        (course_id,
+        course_url,
+        course_time,
+        course_size,
+        course_score,
+        status)
+        values
+        (#{courseId},
+        #{courseUrl},
+        #{courseTime},
+        #{courseSize},
+        #{courseScore},
+        1)
+    </insert>
+
+    <insert id="insertCourseDataByCourseId" parameterType="CourseDataVo">
+        insert into course_data
+        (course_id,
+        data_name,
+        data_url,
+        show_order,
+        status)
+        values
+        <foreach collection="list" item="i" index="index" separator=",">
+            (#{i.courseId},
+            #{i.dataName},
+            #{i.dataUrl},
+            #{i.showOrder},
+            1)
+        </foreach>
+    </insert>
 </mapper>

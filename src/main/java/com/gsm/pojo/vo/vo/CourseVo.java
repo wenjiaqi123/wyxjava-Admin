@@ -25,7 +25,6 @@ public class CourseVo {
     @ApiModelProperty("状态")
     private Integer status;
 
-
     @ApiModelProperty("课程")
     private CourseDetailsDo courseDetailsDo;
 }
