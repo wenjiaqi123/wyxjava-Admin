@@ -6,7 +6,6 @@ import com.gsm.pojo.database.CourseDo;
 import com.gsm.pojo.vo.vo.CourseDataVo;
 import com.gsm.pojo.vo.vo.CourseDetailsVo;
 import com.gsm.pojo.vo.vo.CourseVo;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -29,4 +28,8 @@ public interface CourseDao {
     void insertCourseDetailsByCourseId(CourseDetailsVo courseVo);
 
     void insertCourseDataByCourseId(List<CourseDataVo> courseDataVos);
+
+    CourseDo selectCourse(Long id);
+
+    void updateCourse(CourseVo courseVo);
 }

@@ -159,4 +159,20 @@
             1)
         </foreach>
     </insert>
+
+    <select id="selectCourse" parameterType="Long" resultType="CourseDo">
+        select t.id,
+               t.course_name,
+               t.subject_id,
+               t.show_order,
+               t.status
+        from course t
+        where t.id = #{id}
+    </select>
+
+    <update id="updateCourse" parameterType="CourseVo">
+        update course
+        set course_name = #{courseName}
+        where id = #{id}
+    </update>
 </mapper>

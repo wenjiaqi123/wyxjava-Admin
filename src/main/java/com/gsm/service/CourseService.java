@@ -1,6 +1,7 @@
 package com.gsm.service;
 
 import com.gsm.pojo.database.CourseDetailsDo;
+import com.gsm.pojo.database.CourseDo;
 import com.gsm.pojo.vo.baseVo.BoolVo;
 import com.gsm.pojo.vo.baseVo.ListVo;
 import com.gsm.pojo.vo.vo.CourseDataVo;
@@ -23,4 +24,8 @@ public interface CourseService {
     BoolVo updateCourseDataList(Long courseId, List<CourseDataVo> list);
 
     BoolVo insertCourseDetailsAndData(CourseVo courseVo, CourseDetailsVo vo);
+
+    CourseDo selectCourse(Long id);
+
+    BoolVo updateCourse(CourseVo courseVo);
 }

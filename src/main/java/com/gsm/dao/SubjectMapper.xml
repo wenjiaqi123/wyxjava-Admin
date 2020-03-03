@@ -121,4 +121,41 @@
                sub_pic = #{subPic}
         where subject_id = #{subjectId}
     </update>
+
+    <update id="updateSubjectById" parameterType="SubjectVo">
+        update subject
+        set subject_name = #{subjectName}
+        where id = #{id}
+    </update>
+
+    <insert id="insertSubject" parameterType="SubjectVo" keyProperty="id" useGeneratedKeys="true">
+        <selectKey resultType="Long" keyProperty="id" order="AFTER">
+            select LAST_INSERT_ID()
+        </selectKey>
+        insert into subject
+        (subject_name,
+        status)
+        values
+        (#{subjectName},
+        1)
+    </insert>
+
+    <insert id="insertSubjectDetails" parameterType="SubjectDetailsVo">
+        insert into subject_details
+        (subject_id,
+        sub_introduction,
+        sub_teacher,
+        qq_group,
+        sub_pic,
+        sub_score,
+        status)
+        values
+        (#{subjectId},
+        #{subIntroduction},
+        #{subTeacher},
+        #{qqGroup},
+        #{subPic},
+        #{subScore},
+        1)
+    </insert>
 </mapper>

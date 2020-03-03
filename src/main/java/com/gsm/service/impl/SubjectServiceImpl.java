@@ -60,9 +60,19 @@ public class SubjectServiceImpl implements SubjectService {
     }
 
     @Override
-    public BoolVo updateSubjectDetailsById(SubjectDetailsVo subjectDetailsVo) {
+    public BoolVo updateSubjectDetailsById(SubjectVo subjectVo, SubjectDetailsVo subjectDetailsVo) {
+        subjectDao.updateSubjectById(subjectVo);
         subjectDao.updateSubjectDetailsById(subjectDetailsVo);
         BoolVo boolVo = new BoolVo(true,"修改成功");
+        return boolVo;
+    }
+
+    @Override
+    public BoolVo insertSubject(SubjectVo subjectVo, SubjectDetailsVo subjectDetailsVo) {
+        subjectDao.insertSubject(subjectVo);
+        subjectDetailsVo.setSubjectId(subjectVo.getId());
+        subjectDao.insertSubjectDetails(subjectDetailsVo);
+        BoolVo boolVo = new BoolVo(true,"新增成功");
         return boolVo;
     }
 

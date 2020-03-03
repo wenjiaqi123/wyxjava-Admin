@@ -16,4 +16,10 @@ public interface SubjectDao {
     SubjectDo selectSubjectDetailsById(Long id);
 
     void updateSubjectDetailsById(SubjectDetailsVo subjectDetailsVo);
+
+    void updateSubjectById(SubjectVo subjectVo);
+
+    void insertSubject(SubjectVo subjectVo);
+
+    void insertSubjectDetails(SubjectDetailsVo subjectDetailsVo);
 }

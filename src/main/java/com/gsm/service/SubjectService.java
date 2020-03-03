@@ -15,5 +15,7 @@ public interface SubjectService {
 
     BoolVo updateSubjectStatus(SubjectVo subjectVo);
 
-    BoolVo updateSubjectDetailsById(SubjectDetailsVo subjectDetailsVo);
+    BoolVo updateSubjectDetailsById(SubjectVo subjectVo, SubjectDetailsVo subjectDetailsVo);
+
+    BoolVo insertSubject(SubjectVo subjectVo, SubjectDetailsVo subjectDetailsVo);
 }

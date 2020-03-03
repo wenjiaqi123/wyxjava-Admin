@@ -93,4 +93,17 @@ public class CourseServiceImpl implements CourseService {
         BoolVo boolVo = new BoolVo(true, "保存成功");
         return boolVo;
     }
+
+    @Override
+    public CourseDo selectCourse(Long id) {
+        CourseDo courseDo = courseDao.selectCourse(id);
+        return courseDo;
+    }
+
+    @Override
+    public BoolVo updateCourse(CourseVo courseVo) {
+        courseDao.updateCourse(courseVo);
+        BoolVo boolVo = new BoolVo(true, "修改成功");
+        return boolVo;
+    }
 }

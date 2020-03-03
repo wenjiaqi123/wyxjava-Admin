@@ -48,8 +48,17 @@ public class SubjectController {
 
     @ApiOperation("更新课程详情")
     @PutMapping("/subjectDetails")
-    public BoolVo updateSubjectDetailsById(SubjectDetailsVo subjectDetailsVo){
-        BoolVo boolVo = subjectService.updateSubjectDetailsById(subjectDetailsVo);
+    public BoolVo updateSubjectDetailsById(SubjectVo subjectVo,SubjectDetailsVo subjectDetailsVo){
+        subjectVo.setId(subjectDetailsVo.getSubjectId());
+        BoolVo boolVo = subjectService.updateSubjectDetailsById(subjectVo,subjectDetailsVo);
+        return boolVo;
+    }
+
+    @ApiOperation("新增一门新课程")
+    @PostMapping("/subject")
+    public BoolVo insertSubject(SubjectVo subjectVo,SubjectDetailsVo subjectDetailsVo){
+        subjectVo.setId(subjectDetailsVo.getSubjectId());
+        BoolVo boolVo = subjectService.insertSubject(subjectVo,subjectDetailsVo);
         return boolVo;
     }
 }

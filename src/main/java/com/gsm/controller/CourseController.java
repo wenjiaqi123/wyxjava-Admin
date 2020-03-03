@@ -1,6 +1,7 @@
 package com.gsm.controller;
 
 import com.gsm.pojo.database.CourseDetailsDo;
+import com.gsm.pojo.database.CourseDo;
 import com.gsm.pojo.vo.baseVo.BoolVo;
 import com.gsm.pojo.vo.baseVo.ListVo;
 import com.gsm.pojo.vo.vo.CourseDataVo;
@@ -18,6 +19,13 @@ import org.springframework.web.bind.annotation.*;
 public class CourseController {
     @Autowired
     private CourseService courseService;
+
+    @ApiOperation("获取课程信息")
+    @GetMapping("/course")
+    public CourseDo selectCourse(Long id){
+        CourseDo courseDo = courseService.selectCourse(id);
+        return courseDo;
+    }
 
     @ApiOperation("获取课程列表")
     @GetMapping("/courseList")
@@ -49,10 +57,12 @@ public class CourseController {
 
     @ApiOperation("更新课程详细信息")
     @PostMapping("/courseDetails")
-    public BoolVo updateCourseDetails(CourseDetailsVo vo){
+    public BoolVo updateCourseDetails(CourseVo courseVo,CourseDetailsVo vo){
+        courseVo.setId(vo.getCourseId());
+        BoolVo b0 = courseService.updateCourse(courseVo);
         BoolVo b1 = courseService.updateCourseDetails(vo);
         BoolVo b2 = courseService.updateCourseDataList(vo.getCourseId(),vo.getCourseDataVos());
-        if(b1.getFlag() && b2.getFlag()){
+        if(b0.getFlag() && b1.getFlag() && b2.getFlag()){
             BoolVo boolVo = new BoolVo(true, "修改成功");
             return boolVo;
         }else {
